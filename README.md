@@ -1,5 +1,14 @@
 # プロジェクト説明(Engineer_match_app)
 
+## 前提(conda環境を作る)
+  - pipでいれたやつと,condaで入れたやつ
+    ~~~ bash
+      $ conda env create -n "$your_enviroment" -f origin_application_venv.yml
+      $ pip install -r requirements.txt
+    ~~~
+  - venv環境dir直下に本リポジトリをクローン
+
+
 ## 1. 環境変数
 
 - クレデンシャル等で必要になったものは.envに記載したうえでモジュール上で以下を実行してください

@@ -26,9 +26,9 @@
       ~~~
     - .envの作り方
     ``` yaml
-      secret_key="私に聞いてください"
-      db_user="$your_user_name"
-      db_password="$your_password_name"
+      secret_key=私に聞いてください
+      db_user=$your_user_name
+      db_password=$your_password_name
     ```
 ## 1.2 anacondaの仮想環境
 - 環境構築について説明します。当リポジトリのvenv_create配下にある以下のファイルを使用します。
@@ -46,5 +46,18 @@
       - 正常に環境が作られたか確認(下にさっき作った環境が出てくる)
         ```bash
         $ conda info -e 
+        # conda environments:
+        #
+        base                  *  C:\Users\hoge\anaconda3
+        venv_match_app           C:\Users\hoge\anaconda3\envs\venv_match_app
         ```
+      - 仮想環境の開始と終了
+        ``` bash
+        (base) C:\dev\myapp\engineer_match_app>$ conda activate venv_match_app
+        (venv_match_app) C:\dev\myapp\engineer_match_app>$ conda deactivate
+        ```
+        - 横にあるのが環境名
+## 【注意ポイント】
 
+- vsCodeで仮想環境を使用するときに、インタープリタを選択する必要があります。(コマンドパレットでググったら出てくる)この時に、上記で作成したPythonがインタープリタとして選択されているか確認
+- anacondaのインストール時にpathを通す設定をしていなかった場合はcmdで実行されず不随のanaconda promptでしかcondaコマンドを使えません。vsCodeのターミナルでanacondaPromptを使えない都合上、パスを通しといたほうが後々楽です。

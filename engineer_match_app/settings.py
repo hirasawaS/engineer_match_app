@@ -15,6 +15,7 @@ import os
 from pathlib import Path
 import environ
 
+# これはmanage.pyの絶対パスを表します
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,6 +26,45 @@ TIME_ZONE="Asia/Tokyo"
 env = environ.Env()
 env.read_env(".env")
 
+
+# ログの設定(初期表示はかなり見にくいので改修)
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    
+    # ログ出力フォーマットの設定
+    'formatters': {
+        'dev': {
+            'format': '\t'.join([
+                '%(asctime)s' ,
+                '[%(levelname)s]',
+                '%(pathname)s(Line:%(lineno)d)',
+                '%(message)s'
+                ])
+            },
+        },
+    # ハンドラの設定
+    'handlers': {
+        'console':{
+            'level': 'DEBUG',
+            'class' : 'logging.StreamHandler',
+            'formatter':'dev'
+        }
+    },
+    # ロガーの設定
+    'loggers': {
+        # 自分で追加したアプリケーション全般のログを拾うロガー
+        'mainapp': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        # Django自身が出力するログ全般を拾うロガー
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+    },
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -85,7 +125,6 @@ WSGI_APPLICATION = "engineer_match_app.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# クレデンシャルをべた書きしたくない......
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
